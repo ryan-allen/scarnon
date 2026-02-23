@@ -26,7 +26,7 @@ The whole thing runs in about 2 minutes for 3 videos. Not bad for a bloke in a t
 Chuck it in your skills directory:
 
 ```bash
-git clone <this-repo> ~/.claude/skills/scarnon
+git clone https://github.com/ryan-allen/scarnon.git ~/.claude/skills/scarnon
 ```
 
 Or just paste this repo URL into Claude Code and say *"oi install this skill for me yeah"* — it'll figure it out. She's not stupid.
@@ -172,5 +172,7 @@ Because every README needs completely irrelevant bonus content.
 **2100** 🦘🤖🌏🍺🏄✨ Heat death of the universe still 10^100 years away. Sydney-Melbourne rail still under consultation. A kangaroo with cybernetic legs wins gold at the Olympics. The last coal mine is converted into a craft brewery. Australia is exactly the same as it's always been, just with better wifi. She'll be right.
 
 ---
+
+Shoutout to [geelen](https://github.com/geelen) for nudging me to turn this into a proper skill and put it out there. Legend.
 
 Also check out [peon-ping](https://peon-ping.vercel.app) — Warcraft peon sound notifications for Claude Code. Because you deserve to hear "work work" every time a tool fires. It's great.
