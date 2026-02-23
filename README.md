@@ -4,6 +4,8 @@
 
 A [Claude Code](https://docs.anthropic.com/en/docs/claude-code) skill that rips through YouTube so you don't have to. Chuck it a topic, it'll find the videos, grab the transcripts, and give you the good oil — all without leaving your terminal.
 
+![scarnon in action](screenshot.jpeg)
+
 ## What's it do
 
 You say `/scarnon nuclear fusion breakthroughs` and it:
