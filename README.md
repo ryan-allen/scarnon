@@ -151,6 +151,24 @@ Because every README needs completely irrelevant bonus content.
 
 **2020s** 🦠🔒🏠💻🤖🔥🌊 COVID locked everyone inside. Worked from home. AI showed up. Climate kept being cooked. She'll be right. Probably.
 
+### The next 50 years (predictions, no refunds)
+
+**2030s** 🤖🏠💸🌞⚡🚄🦈 AI takes half the desk jobs. Nobody notices because they were on Slack anyway. Solar panels on every roof. High-speed rail from Sydney to Melbourne gets announced for the 47th time. Shark drones patrol Bondi. A house in Sydney still costs more than God.
+
+**2040s** 🧬🌿🏜️💧🐊🤝🦘 Gene-edited crops handle the drought. The Top End becomes the food bowl. Crocodile diplomacy opens trade with Indonesia. Kangaroos are formally granted voting rights in a non-binding plebiscite that goes nowhere. Desalination plants everywhere. Perth finally gets interesting.
+
+**2050s** 🚀🇦🇺🌕🏗️⛏️🍺 Australia's mining companies pivot to asteroid mining because of course they do. First Aussie on the Moon plants a flag and immediately asks where the nearest pub is. Space mining boom makes the 2000s look quaint. Lunar colony gets a Bunnings before a hospital.
+
+**2060s** 🌊🏝️🏙️🐠🤖👴 Sea levels reclaim parts of the Gold Coast. Nobody's that upset because the apartments were ugly anyway. Floating suburbs become a thing. Reef restoration finally works after 40 years of "we're working on it." AI runs most of the government. Honestly, improvement.
+
+**2070s** 🧊🌏🤝🦅🏄🎭 Climate starts stabilising. Australia hosts the Global Climate Summit in a fully solar-powered stadium in Alice Springs. The emu is declared the national spirit animal after winning a second war (don't ask). Surfing becomes an AI-judged Olympic sport. Nobody agrees with the scores. Some things never change.
+
+**2080s** 🧠💡🌐🏠🦑🍷 Neural interfaces go mainstream but Australians mostly use them to send each other memes faster. Housing finally becomes affordable after people realise you can live literally anywhere with satellite internet. Giant squid discovered off Tasmania. Barossa Valley wine now costs $4,000 a bottle and is worth every cent.
+
+**2090s** 🌍🤖🧬🎉🇦🇺🍻 Australia accidentally becomes a superpower because everyone else had wars and we were too far away to get involved. Population hits 60 million, half of whom are in Melbourne arguing about coffee. Genetic engineering means nobody ages past 50 but everyone still complains about their knees. The national motto is officially changed to "she'll be right" and nobody argues.
+
+**2100** 🦘🤖🌏🍺🏄✨ Heat death of the universe still 10^100 years away. Sydney-Melbourne rail still under consultation. A kangaroo with cybernetic legs wins gold at the Olympics. The last coal mine is converted into a craft brewery. Australia is exactly the same as it's always been, just with better wifi. She'll be right.
+
 ---
 
 Also check out [peon-ping](https://peon-ping.vercel.app) — Warcraft peon sound notifications for Claude Code. Because you deserve to hear "work work" every time a tool fires. It's great.
