@@ -30,10 +30,12 @@ If missing, tell the user what's needed and why, and offer to install it. If the
 ```
 /scarnon                       -> Search Mode (guided)
 /scarnon <topic text>          -> Search Mode with topic pre-filled
+/scarnon <url>                 -> Direct Mode (single video)
 ```
 
 `$ARGUMENTS` determines behavior:
 - Empty or missing -> **Search Mode** (ask for topic)
+- Contains a URL (starts with `http`) -> **Direct Mode**
 - Contains text (no `http`) -> **Search Mode** with topic pre-filled
 
 ## Search Mode
@@ -429,6 +431,133 @@ End with:
 > - **Extract all quotes** on a specific sub-topic
 > - **Web search** to follow up on claims or find newer information
 > - **Research more** — search for additional videos on this topic
+> Just ask!
+```
+
+## Direct Mode
+
+Entered when `$ARGUMENTS` contains a URL (starts with `http`).
+
+Single video — no search, no clustering, no subagents. Just download, transcribe, summarise.
+
+### Step 1: Normalise URL
+
+Extract the YouTube video ID from any URL format and normalise to canonical form:
+- `https://www.youtube.com/watch?v=XXXX` -> use `XXXX`
+- `https://youtu.be/XXXX` -> use `XXXX`
+- `https://youtube.com/watch?v=XXXX&t=123` -> use `XXXX`
+- `https://www.youtube.com/embed/XXXX` -> use `XXXX`
+
+Canonical URL: `https://www.youtube.com/watch?v=XXXX`
+
+### Step 2: Check yt-dlp
+
+```bash
+command -v yt-dlp >/dev/null 2>&1 && echo "OK" || echo "MISSING"
+```
+
+If missing, offer to install: `brew install yt-dlp`
+
+### Step 3: Download subtitles + metadata
+
+```bash
+CACHE_DIR="/Users/ryan/.claude/skills/scarnon/.cache"
+mkdir -p "$CACHE_DIR"
+
+VID="VIDEO_ID"
+URL="https://www.youtube.com/watch?v=${VID}"
+HASH=$(echo -n "$URL" | md5 -q -s "$URL" 2>/dev/null || echo -n "$URL" | md5sum | awk '{print $1}')
+SRT_FILE="${CACHE_DIR}/${HASH}_audio.srt"
+META_FILE="${CACHE_DIR}/${HASH}_metadata.txt"
+
+# Skip if already cached
+if [ -f "$SRT_FILE" ] && [ -s "$SRT_FILE" ]; then
+  echo "CACHED"
+else
+  # Download auto-subs
+  yt-dlp --write-auto-subs --sub-langs "en.*" --sub-format srt \
+    --skip-download -o "${CACHE_DIR}/${HASH}_autosub" "$URL" 2>/dev/null
+
+  FOUND=$(ls ${CACHE_DIR}/${HASH}_autosub*.srt 2>/dev/null | head -1)
+  if [ -n "$FOUND" ] && [ -s "$FOUND" ]; then
+    cp "$FOUND" "$SRT_FILE"
+    echo "SUBS_OK"
+  else
+    echo "NO_SUBS"
+  fi
+fi
+
+# Metadata
+if [ ! -f "$META_FILE" ]; then
+  yt-dlp --print "URL: https://www.youtube.com/watch?v=%(id)s
+Title: %(title)s
+Channel: %(channel)s
+Duration: %(duration_string)s
+Description:
+%(description).500s" "$URL" 2>/dev/null > "$META_FILE"
+fi
+
+# Report
+[ -f "$SRT_FILE" ] && [ -s "$SRT_FILE" ] && echo "SRT_SIZE:$(wc -c < "$SRT_FILE" | tr -d ' ')" || echo "NO_TRANSCRIPT"
+[ -f "$META_FILE" ] && head -3 "$META_FILE"
+```
+
+If no subtitles are available, tell the user: "No auto-captions available for this video. Whisper transcription isn't supported yet — sorry mate."
+
+### Step 4: Summarise
+
+For a single video, use a Task subagent with `model: "haiku"` to read the transcript and produce a summary. This keeps the raw SRT (30-70KB) out of main context.
+
+Launch a Task subagent with:
+- `subagent_type: "general-purpose"`
+- `model: "haiku"`
+
+Prompt:
+
+```
+Read the metadata file at {CACHE_DIR}/{hash}_metadata.txt and the transcript file at {CACHE_DIR}/{hash}_audio.srt.
+
+Produce a detailed summary of this video. Be thorough (~1200 tokens).
+
+Return EXACTLY this format:
+
+## {title}
+**{channel}** | {duration}
+{url}
+
+### Overview
+2-3 sentence high-level summary of what the video is about, who's involved, and why it matters.
+
+### Key Points (4-8 items)
+For each major topic/argument:
+#### Topic Name
+2-4 sentence explanation.
+> "exact quote from transcript" — [MM:SS](https://youtube.com/watch?v=VIDEO_ID&t=XXXs)
+
+To calculate timestamps: convert SRT timestamp HH:MM:SS to total seconds for the t= parameter. Pick quotes that are punchy, surprising, or capture the core insight.
+
+### People Mentioned
+- **Name** — who they are and why they're mentioned
+
+### Notable Claims
+2-5 specific factual claims, predictions, or assertions that could be verified. Be specific.
+
+### Resources Mentioned
+Any papers, tools, companies, books, or links referenced.
+```
+
+### Step 5: Present
+
+Take the subagent's output and present it directly to the user. Then end with:
+
+```markdown
+### What Next?
+
+> I have the full transcript cached and can help you:
+> - **Deep dive** into any topic above
+> - **Extract all quotes** on a specific theme
+> - **Web search** to verify claims or find counter-arguments
+> - **Research mode** — search YouTube for more videos on this topic
 > Just ask!
 ```
 

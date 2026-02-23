@@ -48,9 +48,10 @@ brew install yt-dlp
 ```
 /scarnon                              # guided — asks you what topic
 /scarnon future of jobs AI            # pre-filled topic, straight to search
+/scarnon https://youtube.com/watch?v=dQw4w9WgXcQ   # just transcribe this one mate
 ```
 
-Then just follow the prompts. Pick your clusters, narrow your selection, choose your analysis lenses. She's pretty self-explanatory once you're in it.
+The URL mode is for when you've already got a video and just want the summary. No search, no clustering, no fuss. The topic mode is for when you want to go fishing across YouTube and see what's out there.
 
 ## How it works under the hood
 
@@ -93,7 +94,6 @@ Every UI primitive you add to the harness is a building block for skill authors.
 
 ## What it doesn't do (yet)
 
-- **Direct URL mode** — `/scarnon https://youtube.com/...` for a single video
 - **Whisper fallback** — for the ~20% of videos without auto-captions
 - **Library mode** — browse your cached transcripts
 - **Compare mode** — side-by-side analysis of cached videos
