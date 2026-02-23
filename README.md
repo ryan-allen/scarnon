@@ -68,6 +68,27 @@ SRT files are 30-70KB each. Reading three of them into your context window is a 
 
 With compact extractions from each video, the main model cross-references them through whichever lenses you picked: shared themes, contradictions, unique insights, open questions, fact checks, timelines, action items. All with timestamped YouTube links so you can verify anything that sounds suss.
 
+## A case for better AI harness tools
+
+Scarnon is partly a proof of concept. It demonstrates what you can build when an AI harness gives you even basic UI primitives and orchestration tools.
+
+Right now, Claude Code gives skills two key tools beyond the usual read/write/bash:
+
+- **`AskUserQuestion`** — structured prompts with options, multi-select, descriptions. Scarnon uses this four times: topic input, cluster selection, smart narrowing, and lens selection. Each one takes messy data and turns it into a clean decision point. Without it, every interaction would be "type something and hope I parse it right."
+
+- **`Task` subagents** — spin up parallel child agents with their own context. Scarnon fans out to Haiku subagents for transcript extraction: each reads a 30-70KB SRT file independently and returns ~2KB of structured summary. The main context never sees the raw transcripts. Without this, three videos would blow the context window.
+
+That's only two tools and look what falls out: a guided research workflow with parallel search, progressive refinement, context-efficient extraction, and multi-video synthesis. All from a markdown file.
+
+Now imagine what skills could do with:
+- **Persistent state** — remember user preferences, research history, cached results across sessions
+- **Rich selection UI** — checkboxes on actual video cards instead of text descriptions
+- **Progress indicators** — real progress bars instead of "3/5 videos done..."
+- **File/artifact output** — render the synthesis as a proper document, not just chat messages
+- **Webhooks/triggers** — run a search on a schedule, alert when new content drops on a topic
+
+Every UI primitive you add to the harness is a building block for skill authors. The more tools we get, the less janky the UX, and the more ambitious the skills people will build. Scarnon's a taste of what's possible with sweet FA to work with. Give us more and we'll build you something proper.
+
 ## What it doesn't do (yet)
 
 - **Direct URL mode** — `/scarnon https://youtube.com/...` for a single video
@@ -78,6 +99,16 @@ With compact extractions from each video, the main model cross-references them t
 
 She'll get there. Baby steps.
 
+## Something broken?
+
+Don't stress. The skill is just a markdown file — `SKILL.md` — and Claude can read and edit it. If something's not working right, just tell Claude:
+
+> *"oi the search is coming back with garbage, fix the skill"*
+
+It'll read the SKILL.md, figure out what's wrong, patch it, and the fix takes effect immediately — no restart needed. Skills hot-reload every time you invoke them.
+
+If you reckon your fix is useful for everyone, open a PR. Or don't. No worries either way.
+
 ## Why "scarnon"?
 
 Because every good tool deserves a name that makes people go "what?" before they try it. Also because `/transcribe` was taken and this one's better anyway.
@@ -87,3 +118,39 @@ If you're not Australian: "scarnon" is short for "what's going on" — as in, *"
 ## Licence
 
 Do what you want with it mate. Just don't be a drongo about it.
+
+---
+
+## Appendix: History of Australia told with emojis
+
+Because every README needs completely irrelevant bonus content.
+
+**1900s** 🐑🐑🐑🏴󠁧󠁢󠁥󠁮󠁧󠁿➡️🇦🇺🎉 Federation! Six colonies put on a trenchcoat and pretended to be a country.
+
+**1910s** 🇦🇺⚔️🇹🇷💀 Gallipoli. Went to the wrong beach. Became a national identity anyway.
+
+**1920s** 🐨🌾🍺📈 She'll be right. Soldiers came home, wool prices went up, everyone had a beer.
+
+**1930s** 📉😰🌾💀🐇 Depression hit. Then the rabbits came. Then the dust. Rough decade.
+
+**1940s** 🇦🇺⚔️🇯🇵💣🏥✌️ Another war. Darwin got bombed. Kokoda happened. We don't talk about it enough.
+
+**1950s** 🏗️👷🇮🇹🇬🇷🏠🏟️ Post-war boom. Built Snowy Hydro. Invited half of Europe over. Melbourne Olympics.
+
+**1960s** 🏄🎸🇻🇳✊😡 Surfing took off. Got dragged into Vietnam. People got angry about it. Fair enough.
+
+**1970s** 🧔🎵🍷👔🔥💔 Whitlam got sacked. Pub rock peaked. Wine replaced beer (briefly). Political chaos.
+
+**1980s** 🍺🏏⛵🐊🎬🤠 Bob Hawke skolled a yard glass. Won the America's Cup. Crocodile Dundee. Peak Australia.
+
+**1990s** 🦘💻🏉🎶🌏 Dial-up internet arrived. Keating looked to Asia. Silverchair. Everyone got a mobile phone the size of a brick.
+
+**2000s** 🏅🔥🌊💧😢🏠💰 Sydney Olympics. Then bushfires. Then floods. Then drought. Then the mining boom paid for everyone's mortgage.
+
+**2010s** 🔄👔🔄👔🔄👔🏠📈🔥 Six prime ministers in a decade. House prices went mental. The fires got worse.
+
+**2020s** 🦠🔒🏠💻🤖🔥🌊 COVID locked everyone inside. Worked from home. AI showed up. Climate kept being cooked. She'll be right. Probably.
+
+---
+
+Also check out [peon-ping](https://peon-ping.vercel.app) — Warcraft peon sound notifications for Claude Code. Because you deserve to hear "work work" every time a tool fires. It's great.
