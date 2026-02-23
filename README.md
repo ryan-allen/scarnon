@@ -4,6 +4,8 @@
 
 A [Claude Code](https://docs.anthropic.com/en/docs/claude-code) skill that rips through YouTube so you don't have to. Chuck it a topic, it'll find the videos, grab the transcripts, and give you the good oil — all without leaving your terminal.
 
+Thanks to [geelen](https://github.com/geelen) for the nudge to turn this into a skill and release it.
+
 ![scarnon in action](screenshot.jpeg)
 
 ## What's it do
@@ -172,7 +174,5 @@ Because every README needs completely irrelevant bonus content.
 **2100** 🦘🤖🌏🍺🏄✨ Heat death of the universe still 10^100 years away. Sydney-Melbourne rail still under consultation. A kangaroo with cybernetic legs wins gold at the Olympics. The last coal mine is converted into a craft brewery. Australia is exactly the same as it's always been, just with better wifi. She'll be right.
 
 ---
-
-Shoutout to [geelen](https://github.com/geelen) for nudging me to turn this into a proper skill and put it out there. Legend.
 
 Also check out [peon-ping](https://peon-ping.vercel.app) — Warcraft peon sound notifications for Claude Code. Because you deserve to hear "work work" every time a tool fires. It's great.
